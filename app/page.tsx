@@ -1,62 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
+import { CategoryGrid } from "@/components/category-grid";
 import { OpenStatus } from "@/components/open-status";
-import { PartsSection } from "@/components/parts-section";
+import { generalEnquiryMessage, shop, whatsappHref } from "@/lib/shop";
 
 export default function Home() {
   return (
-    <>
-      <div className="bg-ink text-xs text-frost sm:text-sm">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-2">
-          <span>Kajheri, Sector 52, Chandigarh</span>
-          <span>Mon–Sat 10 AM – 8 PM · Sun 10 AM – 2 PM</span>
-        </div>
-      </div>
-
-      <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
-          <a
-            href="#"
-            className="flex items-center gap-2"
-            aria-label="Maurya Refrigeration home"
-          >
-            <span className="grid h-9 w-9 place-items-center rounded-lg bg-ice text-white">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                aria-hidden="true"
-              >
-                <path d="M12 2v20M4.9 6.5l14.2 11M19.1 6.5 4.9 17.5" />
-              </svg>
-            </span>
-            <span className="font-display text-lg font-bold leading-none">
-              Maurya
-              <br className="sm:hidden" />
-              <span className="text-ice"> Refrigeration</span>
-            </span>
-          </a>
-          <nav
-            className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex"
-            aria-label="Main navigation"
-          >
-            <a href="#parts" className="hover:text-ink">Spare Parts</a>
-            <a href="#about" className="hover:text-ink">About</a>
-            <a href="#gallery" className="hover:text-ink">Gallery</a>
-            <a href="#contact" className="hover:text-ink">Contact</a>
-          </nav>
-          <a
-            href="tel:+919988692928"
-            className="rounded-lg bg-amber px-4 py-2 text-sm font-semibold text-ink hover:brightness-95"
-          >
-            Call Now
-          </a>
-        </div>
-      </header>
-
-      <main>
+    <main>
         <section className="bg-frost">
           <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 md:grid-cols-2 md:py-20">
             <div>
@@ -73,17 +23,17 @@ export default function Home() {
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
-                  href="tel:+919988692928"
+                  href={`tel:${shop.phoneTel}`}
                   className="rounded-lg bg-ice px-5 py-3 font-semibold text-white hover:bg-sky-700"
                 >
-                  Call +91 99886 92928
+                  Call {shop.phoneDisplay}
                 </a>
-                <a
-                  href="#parts"
+                <Link
+                  href="/parts"
                   className="rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold hover:border-ink"
                 >
                   Browse Parts
-                </a>
+                </Link>
               </div>
               <dl className="mt-10 grid max-w-md grid-cols-3 gap-4">
                 <div>
@@ -116,9 +66,35 @@ export default function Home() {
           </div>
         </section>
 
-        <PartsSection />
+        <section id="parts" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 md:py-20">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold text-ice">What we deal in</p>
+            <h2 className="mt-1 font-display text-3xl font-bold md:text-4xl">
+              Spare parts by appliance
+            </h2>
+            <p className="mt-3 text-slate-600">
+              Open a category for the parts we keep, then send the brand and
+              model number on WhatsApp.
+            </p>
+          </div>
+          <div className="mt-8">
+            <CategoryGrid />
+          </div>
+          <p className="mt-6 text-sm text-slate-500">
+            Don&apos;t see your part?{" "}
+            <a
+              href={whatsappHref(generalEnquiryMessage())}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-emerald-700 hover:underline"
+            >
+              Ask on WhatsApp
+            </a>{" "}
+            with the brand and model number — we&apos;ll arrange it.
+          </p>
+        </section>
 
-        <section id="about" className="bg-ink text-white">
+        <section id="about" className="scroll-mt-24 bg-ink text-white">
           <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-[auto_1fr] md:py-20">
             <div className="flex flex-col items-start">
               <span className="font-display text-7xl font-bold leading-none text-amber md:text-8xl">
@@ -156,7 +132,7 @@ export default function Home() {
 
         <section
           id="gallery"
-          className="mx-auto max-w-6xl px-4 py-16 md:py-20"
+          className="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 md:py-20"
         >
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -204,7 +180,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="contact" className="bg-frost">
+        <section id="contact" className="scroll-mt-24 bg-frost">
           <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:grid-cols-2">
             <div>
               <h2 className="font-display text-3xl font-bold md:text-4xl">
@@ -216,13 +192,13 @@ export default function Home() {
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
-                  href="tel:+919988692928"
+                  href={`tel:${shop.phoneTel}`}
                   className="rounded-lg bg-ice px-5 py-3 font-semibold text-white hover:bg-sky-700"
                 >
-                  Call +91 99886 92928
+                  Call {shop.phoneDisplay}
                 </a>
                 <a
-                  href="https://wa.me/919988692928"
+                  href={whatsappHref(generalEnquiryMessage())}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="rounded-lg bg-emerald-600 px-5 py-3 font-semibold text-white hover:bg-emerald-700"
@@ -265,8 +241,8 @@ export default function Home() {
                   Phone
                 </dt>
                 <dd className="mt-1 font-medium">
-                  <a href="tel:+919988692928" className="hover:text-ice">
-                    +91 99886 92928
+                  <a href={`tel:${shop.phoneTel}`} className="hover:text-ice">
+                    {shop.phoneDisplay}
                   </a>
                 </dd>
               </div>
@@ -287,16 +263,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      <footer className="border-t border-slate-200">
-        <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-2 px-4 py-6 text-sm text-slate-500">
-          <span>© 2026 Maurya Refrigeration · Owner: Ram Raj Maurya</span>
-          <span>
-            Washing Machine, Microwave, Refrigerator &amp; AC Spare Parts
-          </span>
-        </div>
-      </footer>
-    </>
   );
 }
 
